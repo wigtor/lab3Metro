@@ -8,12 +8,12 @@
 		public function __construct($n) {
 			$connect = mysql_connect("localhost","metro", "metro123");
 			$db = mysql_select_db("metroSantiago", $connect);
-			$num_linea = $n;
+			$this->num_linea = $n;
 			$query = "SELECT id_color,nombre_color FROM Linea,Color WHERE Linea.id_color_linea = Color.id_color";
 			$result = mysql_query($query);
 			$fila = mysql_fetch_assoc($result);
-			$id_color = $fila['id_color'];
-			$color_linea = $fila['nombre_color'];
+			$this->id_color = $fila['id_color'];
+			$this->color_linea = $fila['nombre_color'];
 		}
 		
 		public static function getAllLineas() {
@@ -33,7 +33,7 @@
 		public function getEstaciones() {
 			$connect = mysql_connect("localhost","metro", "metro123");
 			$db = mysql_select_db("metroSantiago", $connect);
-			$result = mysql_query("SELECT Estacion.* FROM Estacion NATURAL JOIN Anden NATURAL JOIN Linea WHERE Linea.num_linea = '$num_linea'");
+			$result = mysql_query("SELECT Estacion.* FROM Estacion NATURAL JOIN Anden NATURAL JOIN Linea WHERE Linea.num_linea = '".$this->num_linea."'");
 			$i = 0;
 			$matrix = NULL;
 			while($fila = mysql_fetch_assoc($result)){
@@ -44,14 +44,18 @@
 		}
 		
 		public function construirLinea() {
-			echo '<div class="estacion" >   </div> ';
-			echo '<div class="tunel" >   </div> ';
-			echo '<div class="estacion" >   </div> ';
-			echo '<div class="tunel" >   </div> ';
-			echo '<div class="estacion" >   </div> ';
-			echo '<div class="tunel" > </div> ';
-			echo '<div class="estacion" >   </div> ';
-			echo '<div class="tunel" >   </div> ';
+			//Se obtienen el id del primer anden de la via = '1' de la linea que se está construyendo
+			$result = mysql_query("SELECT Anden.id_anden,Estacion.* FROM Primer_anden_linea,Anden,Estacion WHERE Primer_anden_linea.id_anden = Anden.id_anden and Primer_anden_linea.num_linea = '".$this->num_linea."' and Anden.id_estacion = Estacion.id_estacion");
+			$fila = mysql_fetch_assoc($result);
+			$matrix = NULL;
+			while($fila){
+				echo '<div id="'.$fila['id_estacion'].'" class="estacion" >'.$fila['nombre_estacion'].'</div> ';
+				$result = mysql_query("SELECT Tunel.*,Estacion.*,Anden.id_anden FROM Anden,Tunel,Estacion WHERE Anden.id_estacion = Estacion.id_estacion and Anden.id_anden = Tunel.id_anden_destino and Tunel.id_anden_origen = ".$fila['id_anden']."");
+				$fila = mysql_fetch_assoc($result);
+				if ($fila) {
+					echo '<div class="tunel" > </div> ';
+				}
+			}
 		}
 	}
 ?>
