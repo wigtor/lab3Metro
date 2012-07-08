@@ -44,16 +44,20 @@
 		}
 		
 		public function construirLinea() {
+			
 			//Se obtienen el id del primer anden de la via = '1' de la linea que se está construyendo
 			$result = mysql_query("SELECT Anden.id_anden,Estacion.* FROM Primer_anden_linea,Anden,Estacion WHERE Primer_anden_linea.id_anden = Anden.id_anden and Primer_anden_linea.num_linea = '".$this->num_linea."' and Anden.id_estacion = Estacion.id_estacion");
 			$fila = mysql_fetch_assoc($result);
 			$matrix = NULL;
 			while($fila){
-				echo '<div id="'.$fila['id_estacion'].'" class="estacion" >'.$fila['nombre_estacion'].'</div> ';
+				echo '<div id="'.$fila['id_estacion'].'" class="estacion" >';
+					echo '<div id="img_"'.$fila['id_estacion'].'" class="circle_estacion" ></div>';
+					echo '<div id="txt_"'.$fila['id_estacion'].'" class="txt_estacion" >'.$fila['nombre_estacion'].'</div>';
+				echo '</div>';
 				$result = mysql_query("SELECT Tunel.*,Estacion.*,Anden.id_anden FROM Anden,Tunel,Estacion WHERE Anden.id_estacion = Estacion.id_estacion and Anden.id_anden = Tunel.id_anden_destino and Tunel.id_anden_origen = ".$fila['id_anden']."");
 				$fila = mysql_fetch_assoc($result);
 				if ($fila) {
-					echo '<div class="tunel" > </div> ';
+					echo '<div class="tunel" style="background-color:'.$this->color_linea.';"> </div> ';
 				}
 			}
 		}
