@@ -1,4 +1,3 @@
-
 <?php
 	class linea {
 		private $num_linea;
