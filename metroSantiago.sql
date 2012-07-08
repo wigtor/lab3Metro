@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 08-07-2012 a las 03:54:31
+-- Tiempo de generación: 08-07-2012 a las 21:22:12
 -- Versión del servidor: 5.5.16
 -- Versión de PHP: 5.3.8
 
@@ -285,6 +285,26 @@ CREATE TABLE IF NOT EXISTS `Posicion_tren` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `Primer_anden_linea`
+--
+
+CREATE TABLE IF NOT EXISTS `Primer_anden_linea` (
+  `num_linea` int(11) NOT NULL,
+  `id_anden` int(11) NOT NULL,
+  KEY `id_anden` (`id_anden`),
+  KEY `num_linea` (`num_linea`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `Primer_anden_linea`
+--
+
+INSERT INTO `Primer_anden_linea` (`num_linea`, `id_anden`) VALUES
+(1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `Rango_horario`
 --
 
@@ -440,6 +460,13 @@ ALTER TABLE `Posicion_tren`
   ADD CONSTRAINT `Posicion_tren_ibfk_1` FOREIGN KEY (`id_tren`) REFERENCES `Tren` (`id_tren`),
   ADD CONSTRAINT `Posicion_tren_ibfk_2` FOREIGN KEY (`id_anden`) REFERENCES `Anden` (`id_anden`),
   ADD CONSTRAINT `Posicion_tren_ibfk_3` FOREIGN KEY (`id_conductor`) REFERENCES `Conductor` (`id_conductor`);
+
+--
+-- Filtros para la tabla `Primer_anden_linea`
+--
+ALTER TABLE `Primer_anden_linea`
+  ADD CONSTRAINT `Primer_anden_linea_ibfk_2` FOREIGN KEY (`id_anden`) REFERENCES `Anden` (`id_anden`),
+  ADD CONSTRAINT `Primer_anden_linea_ibfk_1` FOREIGN KEY (`num_linea`) REFERENCES `Linea` (`num_linea`);
 
 --
 -- Filtros para la tabla `Rango_horario`
