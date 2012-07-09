@@ -8,7 +8,7 @@
 			$connect = mysql_connect("localhost","metro", "metro123");
 			$db = mysql_select_db("metroSantiago", $connect);
 			$this->num_linea = $n;
-			$query = "SELECT id_color,nombre_color FROM Linea,Color WHERE Linea.id_color_linea = Color.id_color";
+			$query = "SELECT id_color,nombre_color FROM Linea,Color WHERE Linea.id_color_linea = Color.id_color and Linea.num_linea = '". $n ."'";
 			$result = mysql_query($query);
 			$fila = mysql_fetch_assoc($result);
 			$this->id_color = $fila['id_color'];
@@ -50,7 +50,14 @@
 			$matrix = NULL;
 			while($fila){
 				echo '<div id="'.$fila['id_estacion'].'" class="estacion" >';
-					echo '<div id="img_"'.$fila['id_estacion'].'" class="circle_estacion" ></div>';
+					$estacionDoble = mysql_query("SELECT * FROM Anden NATURAL JOIN Estacion NATURAL JOIN Linea WHERE id_estacion = '" . $fila['id_estacion'] . "' GROUP BY id_estacion HAVING COUNT(*)>1");
+					$numeroLineasPorEstacion = mysql_num_rows($estacionDoble);
+					if ($numeroLineasPorEstacion) {
+						echo '<div id="img_"'.$fila['id_estacion'].'" class="circle_estacion_combinacion" ></div>';
+					}
+					else {
+						echo '<div id="img_"'.$fila['id_estacion'].'" class="circle_estacion" ></div>';
+					}
 					echo '<div id="txt_"'.$fila['id_estacion'].'" class="txt_estacion" >'.$fila['nombre_estacion'].'</div>';
 				echo '</div>';
 				$result = mysql_query("SELECT Tunel.*,Estacion.*,Anden.id_anden FROM Anden,Tunel,Estacion WHERE Anden.id_estacion = Estacion.id_estacion and Anden.id_anden = Tunel.id_anden_destino and Tunel.id_anden_origen = ".$fila['id_anden']."");
