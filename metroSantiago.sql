@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 08-07-2012 a las 21:22:12
+-- Tiempo de generación: 09-07-2012 a las 03:00:39
 -- Versión del servidor: 5.5.16
 -- Versión de PHP: 5.3.8
 
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `Conductor` (
 
 CREATE TABLE IF NOT EXISTS `Estacion` (
   `id_estacion` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre_estacion` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre_estacion` varchar(30) CHARACTER SET latin1 NOT NULL,
   `id_ruta` int(11) NOT NULL,
   PRIMARY KEY (`id_estacion`),
   KEY `id_ruta` (`id_ruta`)
@@ -147,7 +147,7 @@ INSERT INTO `Estacion` (`id_estacion`, `nombre_estacion`, `id_ruta`) VALUES
 (2, 'La Moneda', 3),
 (3, 'Universidad de Chile', 3),
 (4, 'Santa Lucia', 3),
-(5, 'Universidad Católica', 3),
+(5, 'Universidad Cat&oacute;lica', 3),
 (6, 'Baquedano', 3),
 (7, 'Salvador', 3),
 (8, 'Manuel Montt', 3),
@@ -395,7 +395,8 @@ INSERT INTO `Tunel` (`id_anden_origen`, `id_anden_destino`) VALUES
 (8, 9),
 (9, 10),
 (10, 11),
-(11, 12);
+(11, 12),
+(6, 7);
 
 --
 -- Restricciones para tablas volcadas

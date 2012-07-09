@@ -27,7 +27,7 @@ html{
     display: table;
 }
 body {
-    overflow: hidden;
+    overflow: auto;
     display:table-cell;   
     vertical-align: middle;
     margin: 0;
@@ -102,14 +102,17 @@ body {
 }
 
 .linea {
-	width: 100%;
+	width: auto;
+	min-width:200%;
+	overflow: auto;
 	height: 140px;
 	margin: 15px;
+	margin-left: 25px;
 }
 
 .tunel {
 	//margin:0px;
-	margin-right:0px;
+	margin-right:-9px;
 	margin-left:-4px;
 	vertical-align: top;
 	margin-top:5px;
@@ -134,9 +137,6 @@ body {
 
 .estacion {
 	margin:0px;
-	margin-top:0px;
-	margin-left:-9px;
-	//margin-right:-4px;
 	vertical-align: top;
 	height: 50px;
 	width: 30px;

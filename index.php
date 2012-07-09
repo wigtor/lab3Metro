@@ -33,19 +33,22 @@
 			<div class="elemMenu" >Monitorización</div>
 			<div class="elemMenu" >Asignacion de trenes</div>
 			<div class="elemMenu" >Asignación de conductores</div>
-			<div class="elemMenu" >Acerca de...</div>
+			<div class="elemMenu" >Acerca de...
+				<button onclick="acercaDe.html"> </button>
+			</div>
 		</div>
 	</div>
 
 	<!-- Contenido -->
-	<div id = "body" class="wrapp" border="0">
-		<div class="texto" >Hola mundo CTM!!! </div>
+	<div id = "bodyMonitorización" class="wrapp" border="0">
+		<div class="texto" >Lineas del sistema de metro</div>
 		<div class="mapa" >
 			<?php
 				require_once("linea.php");
 				$arrayLineas = Linea::getAllLineas();
 				$i = 0;
 				while($i < sizeof($arrayLineas)) {
+					echo '<div class="texto" ><b>L'.$arrayLineas[$i]['num_linea'].'</b></div>';
 					$controladorLineas = new Linea($arrayLineas[$i]['num_linea']);
 					echo '<div id="'. $arrayLineas[$i]['num_linea'] .'" class="linea">';
 					$estaciones = $controladorLineas->construirLinea();
