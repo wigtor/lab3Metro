@@ -30,12 +30,10 @@
 			</div>
 		</div>
 		<div id="menu_principal" class="menu">
-			<div class="elemMenu" >Monitorización</div>
-			<div class="elemMenu" >Asignacion de trenes</div>
-			<div class="elemMenu" >Asignación de conductores</div>
-			<div class="elemMenu" >Acerca de...
-				<button onclick="acercaDe.html"> </button>
-			</div>
+			<div class="elemMenu" onclick="window.location='index.php'">Monitorización</div>
+			<div class="elemMenu" onclick="window.location='asignacion_trenes.php'">Asignacion de trenes</div>
+			<div class="elemMenu" onclick="window.location='asignacion_conductores.php'">Asignación de conductores</div>
+			<div class="elemMenu" onclick="window.location='acercaDe.html'">Acerca de...</div>
 		</div>
 	</div>
 
