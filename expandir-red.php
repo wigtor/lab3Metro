@@ -39,10 +39,53 @@
 	</div>
 
 	<!-- Contenido -->
-	<div id = "bodyMonitorización" class="wrapp" border="0">
-		<div class="colAdd" >Agregar lineas </div>
-		<div class="colAdd" >Agregar estaciones </div>
-		<div class="colAdd" >Agregar trenes </div>
+	<div id = "bodyMonitorización" class="wrapp">
+		<div class="colAdd" >
+			<div class="filaSeccion" >
+				<div class="titulo_colAdd" >Agregar lineas</div>
+			</div>
+			<div class="filaSeccion" >Número de la estación:
+				<input type="text" id="text_numStation" >
+			</div>
+			<br>
+			<div class="filaSeccion" > Seleccione color
+				<select id="selectColorForStation">
+					<option value="--">--</option>
+				</select>
+			</div>
+			<div class="filaSeccion" >
+				<button><b>Agregar linea</b><img src="globalimg/btn_add.png" width="25" height="25"></button>
+			</div>
+			<div class="filaSeccion" style="height:30%;">
+				<select name="listaLineas" id="listaLineas" size="10" multiple="multiple" style="width:70%;">
+					
+				</select>
+			</div>
+		</div>
+		
+		
+		<div class="colAdd" >
+			<div class="filaSeccion" >
+				<div class="titulo_colAdd" >Agregar estaciones</div>
+			</div>
+			<div class="filaSeccion" >Nombre de la estación:
+				<input type="text" id="text_nombreEstacion" >
+			</div>
+			<br>
+			<div class="filaSeccion" > Seleccione linea
+				<select id="selectLineaForStation">
+					<option value="--">--</option>
+				</select>
+			</div>
+			<div class="filaSeccion" >
+				<button><b>Agregar estación</b><img src="globalimg/btn_add.png" width="25" height="25"></button>
+			</div>
+			<div class="filaSeccion" style="height:30%;">
+				<select name="listaLineas" id="listaLineas" size="10" multiple="multiple" style="width:70%;">
+					
+				</select>
+			</div>
+		</div>
 		
 	</div>
 	</body>
