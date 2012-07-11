@@ -12,7 +12,7 @@
 			$result = mysql_query($query);
 			$fila = mysql_fetch_assoc($result);
 			$this->id_color = $fila['id_color'];
-			$this->color_linea = $fila['nombre_color'];
+			$this->color_linea = $fila['cod_color'];
 		}
 		
 		public static function getAllLineas() {
@@ -20,6 +20,20 @@
 			$db = mysql_select_db("metroSantiago", $connect);
 			
 			$result = mysql_query("SELECT * FROM Linea");
+			$matrix = NULL;
+			$i = 0;
+			while($fila = mysql_fetch_assoc($result)){
+				$matrix[$i] = $fila;
+				$i = $i + 1;
+			}
+			return $matrix;
+		}
+
+		public static function getAllStationsWithLineas() {
+			$connect = mysql_connect("localhost","metro", "metro123");
+			$db = mysql_select_db("metroSantiago", $connect);
+			
+			$result = mysql_query("SELECT Linea.num_linea,Estacion.id_estacion,Estacion.nombre_estacion FROM Linea NATURAL JOIN Anden NATURAL JOIN Estacion WHERE Anden.via = '1'");
 			$matrix = NULL;
 			$i = 0;
 			while($fila = mysql_fetch_assoc($result)){

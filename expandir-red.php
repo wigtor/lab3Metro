@@ -1,3 +1,13 @@
+<?php
+//Obtengo las lineas y las estaciones existentes
+	require_once("linea.php");
+	$arrayEstaciones = Linea::getAllStationsWithLineas();
+	$arrayLineas = Linea::getAllLineas();
+	require_once("controller.php");
+	$arrayColoresDisp = Controller::getAllColors();
+	
+?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
 	<head>
@@ -50,7 +60,13 @@
 			<br>
 			<div class="filaSeccion" > Seleccione color
 				<select id="selectColorForStation">
-					<option value="--">--</option>
+					<?php
+						$i = 0;
+						while ($i < sizeof($arrayColoresDisp)) {
+							echo '<option id="color_' .$arrayColoresDisp[$i]['id_color']. '">' .$arrayColoresDisp[$i]['nombre_color']. '</option>';
+							$i = $i + 1;
+						}
+					?>
 				</select>
 			</div>
 			<div class="filaSeccion" >
@@ -58,7 +74,13 @@
 			</div>
 			<div class="filaSeccion" style="height:30%;">
 				<select name="listaLineas" id="listaLineas" size="10" multiple="multiple" style="width:70%;">
-					
+					<?php
+						$i = 0;
+						while ($i < sizeof($arrayLineas)) {
+							echo '<option id="linea_' .$arrayLineas[$i]['num_linea']. '">L' .$arrayLineas[$i]['num_linea']. '</option>';
+							$i = $i + 1;
+						}
+					?>
 				</select>
 			</div>
 		</div>
@@ -74,7 +96,13 @@
 			<br>
 			<div class="filaSeccion" > Seleccione linea
 				<select id="selectLineaForStation">
-					<option value="--">--</option>
+					<?php
+						$i = 0;
+						while ($i < sizeof($arrayLineas)) {
+							echo '<option id="selectLinea_' .$arrayLineas[$i]['num_linea']. '">L' .$arrayLineas[$i]['num_linea']. '</option>';
+							$i = $i + 1;
+						}
+					?>
 				</select>
 			</div>
 			<div class="filaSeccion" >
@@ -82,7 +110,13 @@
 			</div>
 			<div class="filaSeccion" style="height:30%;">
 				<select name="listaLineas" id="listaLineas" size="10" multiple="multiple" style="width:70%;">
-					
+					<?php
+						$i = 0;
+						while ($i < sizeof($arrayEstaciones)) {
+							echo '<option id="' .$arrayEstaciones[$i]['num_linea']. '">L' .$arrayEstaciones[$i]['num_linea']. ' - ' .$arrayEstaciones[$i]['nombre_estacion']. '</option>';
+							$i = $i + 1;
+						}
+					?>
 				</select>
 			</div>
 		</div>
