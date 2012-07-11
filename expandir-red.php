@@ -8,7 +8,7 @@
 		<link rel="shortcut icon" type="image/x-icon" href="globalimg/icon.png">		
 
 		<!-- Css -->
-		<link href="css/metroUI.less" rel="stylesheet/less"/>
+		<link href="css/expandir-red.less" rel="stylesheet/less"/>
 
 		<!-- Script Funcional -->
 		<script type="text/javascript" src="globaljs/jquery-1.7.1.min.js"></script>
@@ -40,25 +40,9 @@
 
 	<!-- Contenido -->
 	<div id = "bodyMonitorización" class="wrapp" border="0">
-		<div class="texto" >Lineas del sistema de metro</div>
-		<div class="mapa" >
-			<?php
-				require_once("linea.php");
-				$arrayLineas = Linea::getAllLineas();
-				$i = 0;
-				while($i < sizeof($arrayLineas)) {
-					echo '<div class="texto" ><b>L'.$arrayLineas[$i]['num_linea'].'</b></div>';
-					$controladorLineas = new Linea($arrayLineas[$i]['num_linea']);
-					echo '<div id="'. $arrayLineas[$i]['num_linea'] .'" class="linea">';
-					$estaciones = $controladorLineas->construirLinea();
-					echo '</div>';
-					$i = $i+1;
-				}
-				
-				
-			?>
-			
-		</div>
+		<div class="colAdd" >Agregar lineas </div>
+		<div class="colAdd" >Agregar estaciones </div>
+		<div class="colAdd" >Agregar trenes </div>
 		
 	</div>
 	</body>

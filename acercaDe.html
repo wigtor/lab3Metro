@@ -40,24 +40,14 @@
 
 	<!-- Contenido -->
 	<div id = "bodyMonitorización" class="wrapp" border="0">
-		<div class="texto" >Lineas del sistema de metro</div>
-		<div class="mapa" >
-			<?php
-				require_once("linea.php");
-				$arrayLineas = Linea::getAllLineas();
-				$i = 0;
-				while($i < sizeof($arrayLineas)) {
-					echo '<div class="texto" ><b>L'.$arrayLineas[$i]['num_linea'].'</b></div>';
-					$controladorLineas = new Linea($arrayLineas[$i]['num_linea']);
-					echo '<div id="'. $arrayLineas[$i]['num_linea'] .'" class="linea">';
-					$estaciones = $controladorLineas->construirLinea();
-					echo '</div>';
-					$i = $i+1;
-				}
-				
-				
-			?>
-			
+		<div class="texto" ><b>Autores de interfaz web:</b>
+			<div> Carlos Barrera </div>
+			<div> Víctor Flores </div>
+		</div>
+		<div><br></div>
+		<div class="texto" ><b>Autores de aplicación java:</b>
+			<div> Camila Torres </div>
+			<div> Rodrigo Yañez </div>
 		</div>
 		
 	</div>
