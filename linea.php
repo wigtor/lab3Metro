@@ -8,7 +8,7 @@
 			$connect = mysql_connect("localhost","metro", "metro123");
 			$db = mysql_select_db("metroSantiago", $connect);
 			$this->num_linea = $n;
-			$query = "SELECT id_color,nombre_color FROM Linea,Color WHERE Linea.id_color_linea = Color.id_color and Linea.num_linea = '". $n ."'";
+			$query = "SELECT id_color,nombre_color,cod_color FROM Linea,Color WHERE Linea.id_color_linea = Color.id_color and Linea.num_linea = '". $n ."'";
 			$result = mysql_query($query);
 			$fila = mysql_fetch_assoc($result);
 			$this->id_color = $fila['id_color'];

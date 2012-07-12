@@ -22,6 +22,7 @@
 
 		<!-- Script Funcional -->
 		<script type="text/javascript" src="globaljs/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="globaljs/jquery.json.js"></script>
 
 		<!-- Script Cosmetico -->
 		<script type="text/javascript" src="css/js/less-1.3.0.min.js"></script>
@@ -62,7 +63,7 @@
 					<?php
 						$i = 0;
 						while ($i < sizeof($arrayColoresDisp)) {
-							echo '<option id="color_' .$arrayColoresDisp[$i]['id_color']. '">' .$arrayColoresDisp[$i]['nombre_color']. '</option>';
+							echo '<option value="' .$arrayColoresDisp[$i]['id_color']. '" id="color_' .$arrayColoresDisp[$i]['id_color']. '">' .$arrayColoresDisp[$i]['nombre_color']. '</option>';
 							$i = $i + 1;
 						}
 					?>
@@ -74,7 +75,7 @@
 					<input type="text" id="text_nombreEstacion" >
 			</div>
 			<div class="filaSeccion" >
-				<button><b>Agregar estacion</b><img src="globalimg/btn_add.png" width="25" height="25"></button>
+				<input type="button" value="Agregar estacion" onclick="agregarEstacionToList()"/>
 			</div>
 			
 			<div class="filaSeccion" style="height:30%;">
@@ -83,7 +84,7 @@
 				</select>
 			</div>
 			<div class="filaSeccion" >
-				<button><b>Agregar linea</b><img src="globalimg/btn_add.png" width="25" height="25"></button>
+				<input type="button" value="Agregar linea" onclick="agregarLinea()"/>
 			</div>
 			</SPAN>
 		</div>
@@ -135,7 +136,7 @@
 				</select>
 			</div>
 			<div class="filaSeccion" >
-				<button><b>Agregar estación</b><img src="globalimg/btn_add.png" width="25" height="25"></button>
+				<input type="button"><b>Agregar estación</b><img src="globalimg/btn_add.png" width="25" height="25">
 			</div>
 			<div class="filaSeccion" style="height:30%;">
 				<select name="listaLineas" id="listaLineas" size="10" multiple="multiple" style="width:70%;">
@@ -149,7 +150,7 @@
 				</select>
 			</div>
 		</div>
-		
+		<script type="text/javascript" src="globaljs/expandir-red.js"></script>
 	</div>
 	</body>
 </html>
