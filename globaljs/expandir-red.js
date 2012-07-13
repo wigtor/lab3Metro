@@ -16,6 +16,14 @@ function agregarEstacionToList() {
 
 function agregarLinea() {
 	var numeroLinea = document.getElementById('text_numStation');
+	if (numeroLinea.value == '') {
+		alert('Número de linea vacío');
+		return ;
+	}
+	if (arregloEstaciones.length < 2) {
+		alert('Una nueva linea debe tener al menos dos estaciones');
+		return ;
+	}
 	var selectColor = document.getElementById('selectColorForStation');
 	
 	var estaciones =  $.toJSON(arregloEstaciones);
