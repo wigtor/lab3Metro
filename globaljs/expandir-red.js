@@ -37,8 +37,16 @@ function agregarLinea() {
 			type: "POST",
 			data: "tm_op=1&num_linea="+numeroLinea.value + "&id_color="+selectColor.value + "&estaciones="+estaciones,
 			success: function(data){
+				if (data == 'false') {
+					alert('ERROR: Número de linea ya existe');
+					return ;
+				}
 				alert(data);
+				
+				//Borro la lista de estaciones a agregar
 				arregloEstaciones = new Array();
+				var listaLineas = document.getElementById('listaLineas');
+				listaLineas.innerHTML = '';
 			}
 		});
 	
