@@ -64,7 +64,7 @@
 			$matrix = NULL;
 			while($fila){
 				echo '<div id="'.$fila['id_estacion'].'" class="estacion" >';
-					$estacionDoble = mysql_query("SELECT * FROM Anden NATURAL JOIN Estacion NATURAL JOIN Linea WHERE id_estacion = '" . $fila['id_estacion'] . "' GROUP BY id_estacion HAVING COUNT(*)>1");
+					$estacionDoble = mysql_query("SELECT * FROM Anden NATURAL JOIN Estacion NATURAL JOIN Linea WHERE via = '1' AND id_estacion = '" . $fila['id_estacion'] . "' GROUP BY id_estacion HAVING COUNT(*)>1");
 					$numeroLineasPorEstacion = mysql_num_rows($estacionDoble);
 					if ($numeroLineasPorEstacion) {
 						echo '<div id="img_"'.$fila['id_estacion'].'" class="circle_estacion_combinacion" ></div>';

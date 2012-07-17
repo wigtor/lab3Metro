@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 09-07-2012 a las 03:00:39
+-- Tiempo de generación: 16-07-2012 a las 17:39:04
 -- Versión del servidor: 5.5.16
 -- Versión de PHP: 5.3.8
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `Anden` (
   PRIMARY KEY (`id_anden`),
   KEY `id_estacion` (`id_estacion`),
   KEY `id_linea` (`num_linea`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=29 ;
 
 --
 -- Volcado de datos para la tabla `Anden`
@@ -52,7 +52,22 @@ INSERT INTO `Anden` (`id_anden`, `via`, `id_estacion`, `num_linea`) VALUES
 (9, 1, 9, 1),
 (10, 1, 10, 1),
 (11, 1, 11, 1),
-(12, 1, 12, 1);
+(12, 1, 12, 1),
+(13, 1, 13, 2),
+(14, 1, 1, 2),
+(15, 1, 14, 2),
+(16, 2, 1, 1),
+(17, 2, 2, 1),
+(18, 2, 3, 1),
+(19, 2, 4, 1),
+(20, 2, 5, 1),
+(21, 2, 6, 1),
+(22, 2, 7, 1),
+(23, 2, 8, 1),
+(24, 2, 9, 1),
+(25, 2, 10, 1),
+(26, 2, 11, 1),
+(27, 2, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -68,7 +83,36 @@ CREATE TABLE IF NOT EXISTS `Carro` (
   PRIMARY KEY (`id_carro`),
   KEY `id_color` (`id_color`),
   KEY `id_modelo_carro` (`id_modelo_carro`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=24 ;
+
+--
+-- Volcado de datos para la tabla `Carro`
+--
+
+INSERT INTO `Carro` (`id_carro`, `fecha_fabricacion`, `id_modelo_carro`, `id_color`) VALUES
+(1, '1973-01-01', 1, 7),
+(2, '1973-01-01', 1, 7),
+(3, '1973-01-01', 1, 7),
+(4, '1973-01-01', 1, 7),
+(5, '1973-01-01', 1, 7),
+(6, '1973-01-01', 1, 7),
+(7, '1973-01-01', 1, 7),
+(8, '1973-01-01', 1, 7),
+(9, '1973-01-01', 1, 7),
+(10, '1973-01-01', 1, 7),
+(11, '1973-01-01', 1, 7),
+(12, '1973-01-01', 1, 7),
+(13, '1973-01-01', 1, 7),
+(14, '1973-01-01', 1, 7),
+(15, '1973-01-01', 1, 7),
+(16, '1973-01-01', 1, 7),
+(17, '1973-01-01', 1, 7),
+(18, '1973-01-01', 1, 7),
+(19, '1973-01-01', 1, 7),
+(20, '1973-01-01', 1, 7),
+(21, '1973-01-01', 1, 7),
+(22, '1973-01-01', 1, 7),
+(23, '1973-01-01', 1, 7);
 
 -- --------------------------------------------------------
 
@@ -83,6 +127,22 @@ CREATE TABLE IF NOT EXISTS `Carro_forma_tren` (
   KEY `num_tren` (`num_tren`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `Carro_forma_tren`
+--
+
+INSERT INTO `Carro_forma_tren` (`id_carro`, `num_tren`) VALUES
+(1, 2),
+(2, 2),
+(3, 2),
+(4, 2),
+(5, 2),
+(6, 3),
+(7, 3),
+(8, 3),
+(9, 3),
+(10, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -92,22 +152,24 @@ CREATE TABLE IF NOT EXISTS `Carro_forma_tren` (
 CREATE TABLE IF NOT EXISTS `Color` (
   `id_color` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_color` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
+  `cod_color` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id_color`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=10 ;
 
 --
 -- Volcado de datos para la tabla `Color`
 --
 
-INSERT INTO `Color` (`id_color`, `nombre_color`) VALUES
-(1, 'red'),
-(2, 'green'),
-(3, 'blue'),
-(4, 'black'),
-(5, 'orange'),
-(6, 'yellow'),
-(7, 'light blue'),
-(8, 'white');
+INSERT INTO `Color` (`id_color`, `nombre_color`, `cod_color`) VALUES
+(1, 'Rojo', 'red'),
+(2, 'verde', 'green'),
+(3, 'Azul', 'blue'),
+(4, 'Negro', 'black'),
+(5, 'Naranjo', 'orange'),
+(6, 'Amarillo', '#FFC515'),
+(7, 'celeste', '#27E6FF'),
+(8, 'blanco', 'white'),
+(9, 'cafe', '#6D3E12');
 
 -- --------------------------------------------------------
 
@@ -122,7 +184,15 @@ CREATE TABLE IF NOT EXISTS `Conductor` (
   `sueldo_conductor` int(11) NOT NULL,
   `horas_contrato` int(11) NOT NULL,
   PRIMARY KEY (`id_conductor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `Conductor`
+--
+
+INSERT INTO `Conductor` (`id_conductor`, `nombre_conductor`, `edad_conductor`, `sueldo_conductor`, `horas_contrato`) VALUES
+(1, 'Cristobal sanchez', 23, 200000, 50),
+(2, 'Mario Moreno Cantinfla', 30, 2000000, 49);
 
 -- --------------------------------------------------------
 
@@ -136,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `Estacion` (
   `id_ruta` int(11) NOT NULL,
   PRIMARY KEY (`id_estacion`),
   KEY `id_ruta` (`id_ruta`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=15 ;
 
 --
 -- Volcado de datos para la tabla `Estacion`
@@ -154,7 +224,9 @@ INSERT INTO `Estacion` (`id_estacion`, `nombre_estacion`, `id_ruta`) VALUES
 (9, 'Pedro de Valdivia', 3),
 (10, 'Los Leones', 3),
 (11, 'Tobalaba', 3),
-(12, 'El golf', 3);
+(12, 'El golf', 3),
+(13, 'Toesca', 2),
+(14, 'Parque O''Higgins', 1);
 
 -- --------------------------------------------------------
 
@@ -166,7 +238,17 @@ CREATE TABLE IF NOT EXISTS `Estado_tren` (
   `id_estado_tren` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_estado_tren` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id_estado_tren`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `Estado_tren`
+--
+
+INSERT INTO `Estado_tren` (`id_estado_tren`, `nombre_estado_tren`) VALUES
+(1, 'En anden'),
+(2, 'En tunel'),
+(3, 'En cochera'),
+(4, 'En mantencion');
 
 -- --------------------------------------------------------
 
@@ -176,10 +258,19 @@ CREATE TABLE IF NOT EXISTS `Estado_tren` (
 
 CREATE TABLE IF NOT EXISTS `Fabricante` (
   `id_fabricante` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre_fabricante` int(11) NOT NULL,
+  `nombre_fabricante` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `nacionalidad_fabricante` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id_fabricante`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `Fabricante`
+--
+
+INSERT INTO `Fabricante` (`id_fabricante`, `nombre_fabricante`, `nacionalidad_fabricante`) VALUES
+(1, 'ALSTHOM', 'Francia'),
+(2, 'CONCARRIL', 'México'),
+(3, 'CAF', 'España');
 
 -- --------------------------------------------------------
 
@@ -264,7 +355,18 @@ CREATE TABLE IF NOT EXISTS `Modelo_carro` (
   `id_fabricante` int(11) NOT NULL,
   PRIMARY KEY (`id_modelo_carro`),
   KEY `id_fabricante` (`id_fabricante`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `Modelo_carro`
+--
+
+INSERT INTO `Modelo_carro` (`id_modelo_carro`, `nombre_modelo_carro`, `tiene_aire_acondicionado`, `id_fabricante`) VALUES
+(1, 'NS-74', 0, 1),
+(2, 'NS-88', 0, 2),
+(3, 'NS-93', 0, 1),
+(4, 'NS-04', 0, 1),
+(5, 'NS-2007', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -281,6 +383,14 @@ CREATE TABLE IF NOT EXISTS `Posicion_tren` (
   KEY `id_anden` (`id_anden`),
   KEY `id_conductor` (`id_conductor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `Posicion_tren`
+--
+
+INSERT INTO `Posicion_tren` (`id_tren`, `id_anden`, `id_conductor`, `fecha_hora_posicion`) VALUES
+(2, 1, 1, '2012-07-16 06:30:00'),
+(3, 2, 2, '2012-07-16 06:30:00');
 
 -- --------------------------------------------------------
 
@@ -300,7 +410,9 @@ CREATE TABLE IF NOT EXISTS `Primer_anden_linea` (
 --
 
 INSERT INTO `Primer_anden_linea` (`num_linea`, `id_anden`) VALUES
-(1, 1);
+(1, 1),
+(2, 15),
+(1, 27);
 
 -- --------------------------------------------------------
 
@@ -366,7 +478,15 @@ CREATE TABLE IF NOT EXISTS `Tren` (
   `id_estado_tren` int(11) NOT NULL,
   PRIMARY KEY (`id_tren`),
   KEY `id_estado_tren` (`id_estado_tren`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `Tren`
+--
+
+INSERT INTO `Tren` (`id_tren`, `num_convoy`, `fecha_hora_inicio`, `fecha_hora_termino`, `id_estado_tren`) VALUES
+(2, 101, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 1),
+(3, 102, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -396,7 +516,20 @@ INSERT INTO `Tunel` (`id_anden_origen`, `id_anden_destino`) VALUES
 (9, 10),
 (10, 11),
 (11, 12),
-(6, 7);
+(6, 7),
+(15, 13),
+(13, 14),
+(27, 26),
+(26, 25),
+(25, 24),
+(24, 23),
+(23, 22),
+(22, 21),
+(21, 20),
+(20, 19),
+(19, 18),
+(18, 17),
+(17, 16);
 
 --
 -- Restricciones para tablas volcadas
@@ -466,8 +599,8 @@ ALTER TABLE `Posicion_tren`
 -- Filtros para la tabla `Primer_anden_linea`
 --
 ALTER TABLE `Primer_anden_linea`
-  ADD CONSTRAINT `Primer_anden_linea_ibfk_2` FOREIGN KEY (`id_anden`) REFERENCES `Anden` (`id_anden`),
-  ADD CONSTRAINT `Primer_anden_linea_ibfk_1` FOREIGN KEY (`num_linea`) REFERENCES `Linea` (`num_linea`);
+  ADD CONSTRAINT `Primer_anden_linea_ibfk_1` FOREIGN KEY (`num_linea`) REFERENCES `Linea` (`num_linea`),
+  ADD CONSTRAINT `Primer_anden_linea_ibfk_2` FOREIGN KEY (`id_anden`) REFERENCES `Anden` (`id_anden`);
 
 --
 -- Filtros para la tabla `Rango_horario`
@@ -491,8 +624,8 @@ ALTER TABLE `Tren`
 -- Filtros para la tabla `Tunel`
 --
 ALTER TABLE `Tunel`
-  ADD CONSTRAINT `Tunel_ibfk_2` FOREIGN KEY (`id_anden_destino`) REFERENCES `Anden` (`id_anden`),
-  ADD CONSTRAINT `Tunel_ibfk_1` FOREIGN KEY (`id_anden_origen`) REFERENCES `Anden` (`id_anden`);
+  ADD CONSTRAINT `Tunel_ibfk_1` FOREIGN KEY (`id_anden_origen`) REFERENCES `Anden` (`id_anden`),
+  ADD CONSTRAINT `Tunel_ibfk_2` FOREIGN KEY (`id_anden_destino`) REFERENCES `Anden` (`id_anden`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
