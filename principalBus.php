@@ -89,6 +89,32 @@
 			$query = mysql_query("DELETE FROM Linea WHERE num_linea = '$numLinea'");
 			echo 'Realizado';
 		}
+		
+		if ( $option == '3' ){ //Opción para devolver las lineas
+			$connect = mysql_connect("localhost","metro", "metro123");
+			$db = mysql_select_db("metroSantiago", $connect);
+			$result = mysql_query("SELECT * FROM Linea");
+			$matrix = NULL;
+			$i = 0;
+			while($fila = mysql_fetch_assoc($result)){
+				$matrix[$i] = $fila;
+				$i = $i + 1;
+			}
+			echo json_encode($matrix);
+		}
+		if ( $option == '4' ){ //Opción para devolver las estaciones terminales
+			$connect = mysql_connect("localhost","metro", "metro123");
+			$db = mysql_select_db("metroSantiago", $connect);
+			$result = mysql_query("SELECT * FROM Primer_anden_linea NATURAL JOIN Anden NATURAL JOIN Estacion");
+			$matrix = NULL;
+			$i = 0;
+			while($fila = mysql_fetch_assoc($result)){
+				$matrix[$i] = $fila;
+				$i = $i + 1;
+			}
+			echo json_encode($matrix);
+		}
+		
 	}
 	
 ?>

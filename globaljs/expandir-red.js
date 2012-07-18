@@ -1,4 +1,81 @@
 var arregloEstaciones = new Array();
+var arregloLineas = new Array();
+var arregloEstacionesTerminales = new Array();
+
+function listarLineas() {
+	$.ajax({
+		url: "principalBus.php",
+		type: "POST",
+		data: "tm_op=3",
+		async: false,
+		success: function(data){
+			arregloLineas = $.parseJSON(data);
+			var listaLineas = document.getElementById('selectLineaForStation');
+			for (var i = 0; i < arregloLineas.length; i++) {
+				listaLineas.innerHTML = listaLineas.innerHTML + '<option id="selectLinea_' + arregloLineas[i]['num_linea'] +'">L'+ arregloLineas[i]['num_linea'] +'</option>';
+			}
+		}
+	});
+}
+
+function traerEstacionesTerminales() {
+	$.ajax({
+		url: "principalBus.php",
+		type: "POST",
+		data: "tm_op=4",
+		async: false,
+		success: function(data){
+			//alert(data);
+			arregloEstacionesTerminales = $.parseJSON(data);
+			var selectTerminales = document.getElementById('estacionTerminal');
+			var selectLineas = document.getElementById('selectLineaForStation');
+			//alert(selectLineas.value);
+			var temp;
+			var k = 0;
+			for (var i = 0; i < arregloEstacionesTerminales.length; i++) {
+				temp = selectLineas.value;
+				if (parseInt(arregloEstacionesTerminales[i]['num_linea']) == parseInt(temp.substr(1, temp.length))) {
+					selectTerminales.innerHTML = selectTerminales.innerHTML + '<option id="selectLinea_' + arregloEstacionesTerminales[i]['id_anden'] +'">'+ arregloEstacionesTerminales[i]['nombre_estacion'] +'</option>';
+					k++;
+				}
+			}
+		}
+	});
+}
+
+function cambiarEstacionesTerminales() {
+	
+	var selectTerminales = document.getElementById('estacionTerminal');
+	var selectLineas = document.getElementById('selectLineaForStation');
+	selectTerminales.innerHTML = '';
+	//alert(selectLineas.value);
+	var temp;
+	var k = 0;
+	for (var i = 0; i < arregloEstacionesTerminales.length; i++) {
+		temp = selectLineas.value;
+		if (parseInt(arregloEstacionesTerminales[i]['num_linea']) == parseInt(temp.substr(1, temp.length))) {
+			selectTerminales.innerHTML = selectTerminales.innerHTML + '<option id="selectLinea_' + arregloEstacionesTerminales[i]['id_anden'] +'">'+ arregloEstacionesTerminales[i]['nombre_estacion'] +'</option>';
+			k++;
+		}
+	}
+}
+
+
+function agregarEstacion() {
+	var nombreEstacionStr = document.getElementById('text_nombreEstacion2');
+	
+	if (nombreEstacionStr.value == '') {
+		alert('Debe introducir un nombre de estación');
+		return;
+	}
+	var selectEstacionTerminal = document.getElementById('estacionTerminal');
+	var selectLinea = document.getElementById('selectLineaForStation');
+	var numLinea = selectLinea.value.substr(1, selectLinea.value.length);
+	//FALTA VALUE EN LOS SELECT!!!
+	
+	alert('Se va a agregar una estación');
+	
+}
 
 function agregarEstacionToList() {
 	var nombreEstacion = document.getElementById('text_nombreEstacion');

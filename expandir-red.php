@@ -94,63 +94,34 @@
 			<div class="filaSeccion" >
 				<div class="titulo_colAdd" >Agregar estaciones</div>
 			</div>
-			<div class="filaSeccion" ><SPAN title="Seleccione cuando se agreguen estaciones combinación que ya han sido agregadas con otra linea">Estación ya existe
-				<input type="checkbox" id="check_esCombinación">
-				</SPAN>
-			</div>
+			
 			<div class="filaSeccion" >Nombre de la estación:
-				<div style="Display:none;">
-					<select id="selecEstacionComb" >
-						<?php
-						$i = 0;
-						while ($i < sizeof($arrayEstaciones)) {
-							echo '<option id="est_' .$arrayEstaciones[$i]['id_estacion']. '">' .$arrayEstaciones[$i]['nombre_estacion']. '</option>';
-							$i = $i + 1;
-						}
-						?>
-					</select>
-				</div>
-				<div><input type="text" id="text_nombreEstacion" ></div>
+
+				<div><input type="text" id="text_nombreEstacion2" ></div>
 			</div>
 			<div class="filaSeccion" > Seleccione linea
-				<select id="selectLineaForStation">
-					<?php
-						$i = 0;
-						while ($i < sizeof($arrayLineas)) {
-							echo '<option id="selectLinea_' .$arrayLineas[$i]['num_linea']. '">L' .$arrayLineas[$i]['num_linea']. '</option>';
-							$i = $i + 1;
-						}
-					?>
+				<select id="selectLineaForStation" onChange="cambiarEstacionesTerminales()">
+					
 				</select>
 			</div>
 			<div class="filaSeccion" > Después de la estación:
 				<select id="estacionTerminal">
-					<?php
-						//Construir Array Javascript para que se seleccionen sólo los que hay en la linea seleccionada más arriba!!!
-						$i= 0;
-						while ($i < sizeof($arrayEstacionesTerm)) {
-							echo '<option id="selectEstacionTerm_' .$arrayEstacionesTerm[$i]['id_anden'].'">'.$arrayEstacionesTerm[$i]['nombre_estacion'].'</option>';
-							$i = $i + 1;
-						}
-					?>
+					
 				</select>
 			</div>
 			<div class="filaSeccion" >
-				<input type="button"><b>Agregar estación</b><img src="globalimg/btn_add.png" width="25" height="25">
+				<input type="button" id="btn_agregarEstacion" onclick="agregarEstacion()" value="Agregar estación">
 			</div>
-			<div class="filaSeccion" style="height:30%;">
-				<select name="listaLineas" id="listaLineas" size="10" multiple="multiple" style="width:70%;">
-					<?php
-						$i = 0;
-						while ($i < sizeof($arrayEstaciones)) {
-							echo '<option id="' .$arrayEstaciones[$i]['id_estacion']. '">L' .$arrayEstaciones[$i]['num_linea']. ' - ' .$arrayEstaciones[$i]['nombre_estacion']. '</option>';
-							$i = $i + 1;
-						}
-					?>
-				</select>
-			</div>
+			
 		</div>
 		<script type="text/javascript" src="globaljs/expandir-red.js"></script>
+		
+		<script type="text/javascript">
+			$(function(){
+				listarLineas();
+				traerEstacionesTerminales();
+			});  
+		</script>
 	</div>
 	</body>
 </html>
