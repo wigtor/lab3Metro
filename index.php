@@ -47,7 +47,7 @@
 				$arrayLineas = Linea::getAllLineas();
 				$i = 0;
 				while($i < sizeof($arrayLineas)) {
-					echo '<div class="texto" ><b>L'.$arrayLineas[$i]['num_linea'].'</b></div>';
+					echo '<div class="texto" ><b>L'.$arrayLineas[$i]['num_linea'].'</b> <input type="button" value="Eliminar linea" onclick="eliminarLinea('.$arrayLineas[$i]['num_linea'].')"/> </div>';
 					$controladorLineas = new Linea($arrayLineas[$i]['num_linea']);
 					echo '<div id="'. $arrayLineas[$i]['num_linea'] .'" class="linea">';
 					$estaciones = $controladorLineas->construirLinea();
@@ -62,4 +62,19 @@
 		
 	</div>
 	</body>
+	<script type="text/javascript">
+		function eliminarLinea(num) {
+			if (confirm("¿Seguro que desea borrar la linea N°"+num+"?")) {
+				$.ajax({
+					url: "principalBus.php",
+					type: "POST",
+					data: "tm_op=2&num_linea="+num,
+					success: function(data){
+						alert(data);
+						location.reload();
+					}
+				});
+			}
+		}
+	</script>	
 </html>

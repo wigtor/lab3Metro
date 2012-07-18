@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 16-07-2012 a las 17:39:04
+-- Tiempo de generación: 18-07-2012 a las 01:51:00
 -- Versión del servidor: 5.5.16
 -- Versión de PHP: 5.3.8
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `Anden` (
   PRIMARY KEY (`id_anden`),
   KEY `id_estacion` (`id_estacion`),
   KEY `id_linea` (`num_linea`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=29 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=128 ;
 
 --
 -- Volcado de datos para la tabla `Anden`
@@ -53,9 +53,6 @@ INSERT INTO `Anden` (`id_anden`, `via`, `id_estacion`, `num_linea`) VALUES
 (10, 1, 10, 1),
 (11, 1, 11, 1),
 (12, 1, 12, 1),
-(13, 1, 13, 2),
-(14, 1, 1, 2),
-(15, 1, 14, 2),
 (16, 2, 1, 1),
 (17, 2, 2, 1),
 (18, 2, 3, 1),
@@ -67,7 +64,55 @@ INSERT INTO `Anden` (`id_anden`, `via`, `id_estacion`, `num_linea`) VALUES
 (24, 2, 9, 1),
 (25, 2, 10, 1),
 (26, 2, 11, 1),
-(27, 2, 12, 1);
+(27, 2, 12, 1),
+(80, 1, 41, 5),
+(81, 2, 41, 5),
+(82, 1, 42, 5),
+(83, 2, 42, 5),
+(84, 1, 43, 5),
+(85, 2, 43, 5),
+(86, 1, 44, 5),
+(87, 2, 44, 5),
+(88, 1, 45, 5),
+(89, 2, 45, 5),
+(90, 1, 46, 5),
+(91, 2, 46, 5),
+(92, 1, 47, 5),
+(93, 2, 47, 5),
+(94, 1, 48, 5),
+(95, 2, 48, 5),
+(96, 1, 49, 5),
+(97, 2, 49, 5),
+(98, 1, 50, 5),
+(99, 2, 50, 5),
+(100, 1, 51, 5),
+(101, 2, 51, 5),
+(102, 1, 52, 5),
+(103, 2, 52, 5),
+(104, 1, 6, 5),
+(105, 2, 6, 5),
+(106, 1, 53, 5),
+(107, 2, 53, 5),
+(108, 1, 54, 5),
+(109, 2, 54, 5),
+(110, 1, 55, 5),
+(111, 2, 55, 5),
+(112, 1, 56, 2),
+(113, 2, 56, 2),
+(114, 1, 57, 2),
+(115, 2, 57, 2),
+(116, 1, 58, 2),
+(117, 2, 58, 2),
+(118, 1, 59, 2),
+(119, 2, 59, 2),
+(120, 1, 60, 2),
+(121, 2, 60, 2),
+(122, 1, 61, 2),
+(123, 2, 61, 2),
+(124, 1, 62, 2),
+(125, 2, 62, 2),
+(126, 1, 63, 2),
+(127, 2, 63, 2);
 
 -- --------------------------------------------------------
 
@@ -206,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `Estacion` (
   `id_ruta` int(11) NOT NULL,
   PRIMARY KEY (`id_estacion`),
   KEY `id_ruta` (`id_ruta`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=64 ;
 
 --
 -- Volcado de datos para la tabla `Estacion`
@@ -225,8 +270,29 @@ INSERT INTO `Estacion` (`id_estacion`, `nombre_estacion`, `id_ruta`) VALUES
 (10, 'Los Leones', 3),
 (11, 'Tobalaba', 3),
 (12, 'El golf', 3),
-(13, 'Toesca', 2),
-(14, 'Parque O''Higgins', 1);
+(41, 'Vicente Valdez', 3),
+(42, 'Bellavista de la Florida', 3),
+(43, 'Mirador', 3),
+(44, 'Pedrero', 3),
+(45, 'San JoaquÃ­n', 3),
+(46, 'Camino Agricola', 3),
+(47, 'Carlos Valdovinos', 3),
+(48, 'Rodrigo de Araya', 3),
+(49, 'Ã‘uble', 3),
+(50, 'IrarrÃ¡zabal', 3),
+(51, 'Santa Isabel', 3),
+(52, 'Parque Bustamante', 3),
+(53, 'Bellas Artes', 3),
+(54, 'Plaza de Armas', 3),
+(55, 'Santa Ana', 3),
+(56, 'Vespucio Norte', 3),
+(57, 'Zapadores', 3),
+(58, 'Dorsal', 3),
+(59, 'Einstein', 3),
+(60, 'Cementerios', 3),
+(61, 'Cerro Blanco', 3),
+(62, 'Patronato', 3),
+(63, 'Puente Cal y Canto', 3);
 
 -- --------------------------------------------------------
 
@@ -305,7 +371,7 @@ CREATE TABLE IF NOT EXISTS `Linea` (
   `id_color_linea` int(11) NOT NULL,
   PRIMARY KEY (`num_linea`),
   KEY `id_color_linea` (`id_color_linea`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `Linea`
@@ -313,6 +379,7 @@ CREATE TABLE IF NOT EXISTS `Linea` (
 
 INSERT INTO `Linea` (`num_linea`, `id_color_linea`) VALUES
 (1, 1),
+(5, 2),
 (2, 6);
 
 -- --------------------------------------------------------
@@ -411,8 +478,11 @@ CREATE TABLE IF NOT EXISTS `Primer_anden_linea` (
 
 INSERT INTO `Primer_anden_linea` (`num_linea`, `id_anden`) VALUES
 (1, 1),
-(2, 15),
-(1, 27);
+(1, 27),
+(5, 80),
+(5, 111),
+(2, 112),
+(2, 127);
 
 -- --------------------------------------------------------
 
@@ -517,8 +587,6 @@ INSERT INTO `Tunel` (`id_anden_origen`, `id_anden_destino`) VALUES
 (10, 11),
 (11, 12),
 (6, 7),
-(15, 13),
-(13, 14),
 (27, 26),
 (26, 25),
 (25, 24),
@@ -529,7 +597,29 @@ INSERT INTO `Tunel` (`id_anden_origen`, `id_anden_destino`) VALUES
 (20, 19),
 (19, 18),
 (18, 17),
-(17, 16);
+(17, 16),
+(80, 82),
+(82, 84),
+(84, 86),
+(86, 88),
+(88, 90),
+(90, 92),
+(92, 94),
+(94, 96),
+(96, 98),
+(98, 100),
+(100, 102),
+(102, 104),
+(104, 106),
+(106, 108),
+(108, 110),
+(112, 114),
+(114, 116),
+(116, 118),
+(118, 120),
+(120, 122),
+(122, 124),
+(124, 126);
 
 --
 -- Restricciones para tablas volcadas

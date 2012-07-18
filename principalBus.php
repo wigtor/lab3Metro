@@ -2,7 +2,7 @@
 	if( isset($_POST['tm_op']) ) {
 		$option = $_POST['tm_op'];
 		
-		if( $option == '1' && isset($_POST['num_linea']) && isset($_POST['id_color']) && isset($_POST['estaciones']) ){ //Opción para enviar datos de la tabla.
+		if( $option == '1' && isset($_POST['num_linea']) && isset($_POST['id_color']) && isset($_POST['estaciones']) ){ //Opción para insertar una nueva linea y sus estaciones
 			$connect = mysql_connect("localhost","metro", "metro123");
 			$db = mysql_select_db("metroSantiago", $connect);
 			$estaciones = json_decode($_POST['estaciones']); //Un arreglo de estaciones
@@ -53,7 +53,42 @@
 			$queryExtremo1 = mysql_query("INSERT INTO Primer_anden_linea(num_linea, id_anden) VALUES ('$numLinea', '$id_primerAnden')");
 			$queryExtremo2 = mysql_query("INSERT INTO Primer_anden_linea(num_linea, id_anden) VALUES ('$numLinea', '$id_UltimoAnden')");
 			
-			echo 'bien';
+			echo 'Realizado';
+		}
+		
+		if( $option == '2' && isset($_POST['num_linea']) ){ //Opción para eliminar una linea
+			$connect = mysql_connect("localhost","metro", "metro123");
+			$db = mysql_select_db("metroSantiago", $connect);
+			$numLinea = $_POST['num_linea'];
+			
+			//Borro los tuneles de la linea
+			$query = mysql_query("SELECT id_anden FROM Primer_anden_linea NATURAL JOIN Anden WHERE via = '1' AND num_linea = '$numLinea'");
+			while($row = mysql_fetch_row($query)) {
+				$id_anden = $row[0];
+				$query = mysql_query("SELECT id_anden_destino AS id_anden FROM Tunel WHERE id_anden_origen = '$id_anden'");
+				$queryDeleteTunel = mysql_query("DELETE FROM Tunel WHERE id_anden_origen = '$id_anden'");
+				
+			}
+			
+			//Borro los primeros andenes de la linea
+			$queryDeleteExtremos = mysql_query("DELETE FROM Primer_anden_linea WHERE num_linea = '$numLinea'");
+			
+			
+			
+			//Borro las estaciones de la linea, antes selecciono las estaciones que SOLO pertenecen a la linea que se va a borrar
+			$queryTemp = mysql_query("SELECT id_estacion FROM Anden WHERE via = '1' AND num_linea = '$numLinea' AND (id_estacion) NOT IN (SELECT id_estacion FROM Anden NATURAL JOIN Estacion NATURAL JOIN Linea WHERE via = '1' GROUP BY id_estacion HAVING COUNT(*)>1)");
+			//Borro los andenes de la linea
+			$query = mysql_query("DELETE FROM Anden WHERE num_linea = '$numLinea'");
+			while($row = mysql_fetch_row($queryTemp)) {
+				$id_estacion = $row[0];
+				$queryDeleteEstacion = mysql_query("DELETE FROM Estacion WHERE id_estacion = '$id_estacion'");
+			}
+			
+			
+			//Borro la linea
+			$query = mysql_query("DELETE FROM Linea WHERE num_linea = '$numLinea'");
+			echo 'Realizado';
 		}
 	}
+	
 ?>

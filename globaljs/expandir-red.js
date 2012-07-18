@@ -6,7 +6,15 @@ function agregarEstacionToList() {
 		alert('Nombre de estación vacío');
 		return;
 	}
-	arregloEstaciones[arregloEstaciones.length] = nombreEstacion.value;
+	var nombreEstacionStr = nombreEstacion.value;
+	var temp = '';
+	for (var i = 0; i < nombreEstacionStr.length; i++) {
+		if (nombreEstacionStr[i] == '\'')
+			temp = temp + '\\\'';
+		else 
+			temp = temp + nombreEstacionStr[i];
+	}
+	arregloEstaciones[arregloEstaciones.length] = temp;
 	
 	var listaLineas = document.getElementById('listaLineas');
 	listaLineas.innerHTML = listaLineas.innerHTML + '<option id="" >' + nombreEstacion.value + '</option>';
@@ -33,23 +41,22 @@ function agregarLinea() {
 	var estaciones =  $.toJSON(arregloEstaciones);
 	
 	$.ajax({
-			url: "principalBus.php",
-			type: "POST",
-			data: "tm_op=1&num_linea="+numeroLinea.value + "&id_color="+selectColor.value + "&estaciones="+estaciones,
-			success: function(data){
-				if (data == 'false') {
-					alert('ERROR: Número de linea ya existe');
-					return ;
-				}
-				alert(data);
-				
-				//Borro la lista de estaciones a agregar
-				arregloEstaciones = new Array();
-				var listaLineas = document.getElementById('listaLineas');
-				listaLineas.innerHTML = '';
+		url: "principalBus.php",
+		type: "POST",
+		data: "tm_op=1&num_linea="+numeroLinea.value + "&id_color="+selectColor.value + "&estaciones="+estaciones,
+		success: function(data){
+			if (data == 'false') {
+				alert('ERROR: Número de linea ya existe');
+				return ;
 			}
-		});
-	
+			alert(data);
+			
+			//Borro la lista de estaciones a agregar
+			arregloEstaciones = new Array();
+			var listaLineas = document.getElementById('listaLineas');
+			listaLineas.innerHTML = '';
+		}
+	});
 }
 
 
