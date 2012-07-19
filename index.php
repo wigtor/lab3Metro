@@ -150,7 +150,7 @@
 									$(imagenTren).css('left', '20px');
 								}
 								else {
-									imagenTren.className = 'trenVia2';
+									imagenTren.className = 'tren';
 									$(imagenTren).css('top', '20px');
 									$(imagenTren).css('left', '20px');
 								}

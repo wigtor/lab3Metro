@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 19-07-2012 a las 08:52:43
+-- Tiempo de generación: 19-07-2012 a las 10:32:13
 -- Versión del servidor: 5.5.16
 -- Versión de PHP: 5.3.8
 
@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `Carro` (
   PRIMARY KEY (`id_carro`),
   KEY `id_color` (`id_color`),
   KEY `id_modelo_carro` (`id_modelo_carro`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=36 ;
 
 --
 -- Volcado de datos para la tabla `Carro`
@@ -175,7 +175,17 @@ INSERT INTO `Carro` (`id_carro`, `fecha_fabricacion`, `id_modelo_carro`, `id_col
 (22, '1973-01-01', 1, 7),
 (23, '1973-01-01', 1, 7),
 (24, '1973-01-01', 1, 7),
-(25, '1973-01-01', 1, 7);
+(25, '1973-01-01', 1, 7),
+(26, '1973-01-01', 1, 7),
+(27, '1973-01-01', 1, 7),
+(28, '1973-01-01', 1, 7),
+(29, '1973-01-01', 1, 7),
+(30, '1973-01-01', 1, 7),
+(31, '1973-01-01', 1, 7),
+(32, '1973-01-01', 1, 7),
+(33, '1973-01-01', 1, 7),
+(34, '1973-01-01', 1, 7),
+(35, '1973-01-01', 1, 7);
 
 -- --------------------------------------------------------
 
@@ -219,7 +229,17 @@ INSERT INTO `Carro_forma_tren` (`id_carro`, `num_tren`) VALUES
 (22, 6),
 (23, 6),
 (24, 6),
-(25, 6);
+(25, 6),
+(26, 7),
+(27, 7),
+(28, 7),
+(29, 7),
+(30, 7),
+(31, 8),
+(32, 8),
+(33, 8),
+(34, 8),
+(35, 8);
 
 -- --------------------------------------------------------
 
@@ -411,7 +431,7 @@ CREATE TABLE IF NOT EXISTS `Linea` (
   `id_color_linea` int(11) NOT NULL,
   PRIMARY KEY (`num_linea`),
   KEY `id_color_linea` (`id_color_linea`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `Linea`
@@ -500,7 +520,9 @@ INSERT INTO `Posicion_tren` (`id_tren`, `id_anden`, `id_conductor`, `fecha_hora_
 (3, 2, 2, '2012-07-16 06:30:00'),
 (4, 3, 2, '2012-07-16 06:30:00'),
 (5, 4, 2, '2012-07-16 06:30:00'),
-(6, 5, 2, '2012-07-16 06:30:00');
+(6, 5, 2, '2012-07-16 06:30:00'),
+(7, 26, 2, '2012-07-16 06:30:00'),
+(8, 25, 2, '2012-07-16 06:30:00');
 
 -- --------------------------------------------------------
 
@@ -591,7 +613,7 @@ CREATE TABLE IF NOT EXISTS `Tren` (
   `id_estado_tren` int(11) NOT NULL,
   PRIMARY KEY (`id_tren`),
   KEY `id_estado_tren` (`id_estado_tren`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `Tren`
@@ -599,10 +621,12 @@ CREATE TABLE IF NOT EXISTS `Tren` (
 
 INSERT INTO `Tren` (`id_tren`, `num_convoy`, `fecha_hora_inicio`, `fecha_hora_termino`, `id_estado_tren`) VALUES
 (2, 101, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 1),
-(3, 102, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 1),
+(3, 102, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 2),
 (4, 103, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 1),
 (5, 104, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 1),
-(6, 105, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 1);
+(6, 105, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 2),
+(7, 106, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 2),
+(8, 107, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 2);
 
 -- --------------------------------------------------------
 
@@ -633,17 +657,6 @@ INSERT INTO `Tunel` (`id_anden_origen`, `id_anden_destino`) VALUES
 (10, 11),
 (11, 12),
 (6, 7),
-(27, 26),
-(26, 25),
-(25, 24),
-(24, 23),
-(23, 22),
-(22, 21),
-(21, 20),
-(20, 19),
-(19, 18),
-(18, 17),
-(17, 16),
 (80, 82),
 (82, 84),
 (84, 86),
