@@ -150,7 +150,7 @@
 				$query = mysql_query("SELECT id_anden FROM Anden WHERE num_linea = '$numLinea' and id_estacion = (SELECT id_estacion FROM Anden WHERE id_anden = '$id_anden') and via = '1'");
 				if ($row = mysql_fetch_row($query)) { //Si devolvió algo es porque el anden es de via 1
 					$id_andenFinal = $row[0];
-					$queryTunel = mysql_query("INSERT INTO Tunel(id_anden_origen, id_anden_destino) VALUES ('$id_andenFinal', '$id_anden')");
+					$queryTunel = mysql_query("INSERT INTO Tunel(id_anden_origen, id_anden_destino) VALUES ('$id_andenFinal', '$id_anden1')");
 				}
 			}
 			
@@ -159,7 +159,7 @@
 				$queryExtremo1 = mysql_query("UPDATE Primer_anden_linea SET id_anden = '$id_anden1' WHERE num_linea = '$numLinea' and id_anden = '$id_anden'");
 			}
 			else {
-				$queryExtremo1 = mysql_query("UPDATE Primer_anden_linea SET id_anden = '$id_anden1' WHERE num_linea = '$numLinea' and id_anden = '$id_andenFinal'");
+				$queryExtremo1 = mysql_query("UPDATE Primer_anden_linea SET id_anden = '$id_anden2' WHERE num_linea = '$numLinea' and id_anden = '$id_andenFinal'");
 			}
 			
 			
