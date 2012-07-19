@@ -125,7 +125,10 @@
 								divDePegado = document.getElementById('estacion_' + id_estacion);
 								var imagenTren = document.createElement('div');
 								imagenTren.id = 'tren_'+numConvoy;
-								imagenTren.className = 'tren';
+								if (trenTemp['via'] == '1')
+									imagenTren.className = 'trenVia1';
+								else
+									imagenTren.className = 'trenVia2';
 								imagenTren.innerHTML = ''+numConvoy;
 								//$(imagenTren).hide();
 								$(divDePegado).append(imagenTren);
