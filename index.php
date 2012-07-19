@@ -125,10 +125,16 @@
 								divDePegado = document.getElementById('estacion_' + id_estacion);
 								var imagenTren = document.createElement('div');
 								imagenTren.id = 'tren_'+numConvoy;
-								if (trenTemp['via'] == '1')
-									imagenTren.className = 'trenVia1';
-								else
-									imagenTren.className = 'trenVia2';
+								if (trenTemp['via'] == '1') {
+									imagenTren.className = 'tren';
+									$(imagenTren).css('top', '-120px');
+									$(imagenTren).css('left', '10px');
+								}
+								else {
+									imagenTren.className = 'tren';
+									$(imagenTren).css('top', '-80px');
+									$(imagenTren).css('left', '10px');
+								}
 								imagenTren.innerHTML = ''+numConvoy;
 								//$(imagenTren).hide();
 								$(divDePegado).append(imagenTren);
@@ -136,11 +142,29 @@
 							if (trenTemp['nombre_estado_tren'] == 'En tunel') {
 								divDePegado = document.getElementById('tunel_' + id_estacion);
 								
+								var imagenTren = document.createElement('div');
+								imagenTren.id = 'tren_'+numConvoy;
+								if (trenTemp['via'] == '1') {
+									imagenTren.className = 'tren';
+									$(imagenTren).css('top', '-20px');
+									$(imagenTren).css('left', '20px');
+								}
+								else {
+									imagenTren.className = 'trenVia2';
+									$(imagenTren).css('top', '20px');
+									$(imagenTren).css('left', '20px');
+								}
+								imagenTren.innerHTML = ''+numConvoy;
+								//$(imagenTren).hide();
+								$(divDePegado).append(imagenTren);
 							}
 						}
 						
 					}
 				});
+				
+				//Recargo la página con la posición de los trenes cada 10 segundos
+				setTimeout("location.reload()", 5000);
 		});
 	</script>	
 </html>
