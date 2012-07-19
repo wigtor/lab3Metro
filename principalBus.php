@@ -114,6 +114,57 @@
 			}
 			echo json_encode($matrix);
 		}
+		if ( $option == '5' && isset($_POST['num_linea'])  && isset($_POST['id_anden'])  && isset($_POST['nombre_estacion']) ){ //Opción para devolver las estaciones terminales
+			$connect = mysql_connect("localhost","metro", "metro123");
+			$db = mysql_select_db("metroSantiago", $connect);
+			$nombreEstacion = $_POST['nombre_estacion'];
+			$numLinea = $_POST['num_linea'];
+			$id_anden = $_POST['id_anden'];
+			
+			//$result = mysql_query("INSERT INTO ");
+			$query = mysql_query("SELECT id_estacion FROM Estacion WHERE nombre_estacion = '" .$nombreEstacion. "'");
+			if ($row = mysql_fetch_row($query)) {
+				$id_ultima_estacion = $row[0];
+			}
+			else {
+				$ruta = 3; //Estática por ahora
+				$queryEstacion = mysql_query("INSERT INTO Estacion(nombre_estacion, id_ruta) VALUES ('" .$nombreEstacion. "', '$ruta')");
+				$id_ultima_estacion = mysql_insert_id($connect);//SE OBTIENE EL ID DE LA ULTIMA ESTACIÓN INSERTADA
+			}
+			
+			//Inserto los dos andenes de la nueva estación
+			$queryAnden = mysql_query("INSERT INTO Anden(via, id_estacion, num_linea) VALUES ('1', '$id_ultima_estacion', '$numLinea')");
+			$id_anden1 = mysql_insert_id($connect); //Se guarda el id del último anden insertado
+			
+			$queryAnden = mysql_query("INSERT INTO Anden(via, id_estacion, num_linea) VALUES ('2', '$id_ultima_estacion', '$numLinea')");
+			$id_anden2 = mysql_insert_id($connect); //Se guarda el id del último anden insertado
+			
+			//Agrego el nuevo tunel
+			$query = mysql_query("SELECT via FROM Anden WHERE id_anden = '$id_anden' and via = '1'");
+			if ($row = mysql_fetch_row($query)) { //Si devolvió algo es porque el anden es de via 1
+				$via1 = true;
+				$queryTunel = mysql_query("INSERT INTO Tunel(id_anden_origen, id_anden_destino) VALUES ('$id_anden1', '$id_anden')");
+			}
+			else { //Si es de la via 2, entonces busco el anden de la via 1 en la misma estación
+				$via1 = false;
+				$query = mysql_query("SELECT id_anden FROM Anden WHERE num_linea = '$numLinea' and id_estacion = (SELECT id_estacion FROM Anden WHERE id_anden = '$id_anden') and via = '1'");
+				if ($row = mysql_fetch_row($query)) { //Si devolvió algo es porque el anden es de via 1
+					$id_andenFinal = $row[0];
+					$queryTunel = mysql_query("INSERT INTO Tunel(id_anden_origen, id_anden_destino) VALUES ('$id_andenFinal', '$id_anden')");
+				}
+			}
+			
+			//Actualizo la estación terminal en los punteros a los extremos
+			if ($via1) {
+				$queryExtremo1 = mysql_query("UPDATE Primer_anden_linea SET id_anden = '$id_anden1' WHERE num_linea = '$numLinea' and id_anden = '$id_anden'");
+			}
+			else {
+				$queryExtremo1 = mysql_query("UPDATE Primer_anden_linea SET id_anden = '$id_anden1' WHERE num_linea = '$numLinea' and id_anden = '$id_andenFinal'");
+			}
+			
+			
+			echo 'Realizado';
+		}
 		
 	}
 	
