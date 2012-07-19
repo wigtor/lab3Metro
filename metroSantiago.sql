@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 18-07-2012 a las 01:51:00
+-- Tiempo de generación: 19-07-2012 a las 06:24:15
 -- Versión del servidor: 5.5.16
 -- Versión de PHP: 5.3.8
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `Anden` (
   PRIMARY KEY (`id_anden`),
   KEY `id_estacion` (`id_estacion`),
   KEY `id_linea` (`num_linea`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=128 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=182 ;
 
 --
 -- Volcado de datos para la tabla `Anden`
@@ -97,22 +97,18 @@ INSERT INTO `Anden` (`id_anden`, `via`, `id_estacion`, `num_linea`) VALUES
 (109, 2, 54, 5),
 (110, 1, 55, 5),
 (111, 2, 55, 5),
-(112, 1, 56, 2),
-(113, 2, 56, 2),
-(114, 1, 57, 2),
-(115, 2, 57, 2),
-(116, 1, 58, 2),
-(117, 2, 58, 2),
-(118, 1, 59, 2),
-(119, 2, 59, 2),
-(120, 1, 60, 2),
-(121, 2, 60, 2),
-(122, 1, 61, 2),
-(123, 2, 61, 2),
-(124, 1, 62, 2),
-(125, 2, 62, 2),
-(126, 1, 63, 2),
-(127, 2, 63, 2);
+(170, 1, 79, 1),
+(171, 2, 79, 1),
+(172, 1, 80, 1),
+(173, 2, 80, 1),
+(174, 1, 81, 1),
+(175, 2, 81, 1),
+(176, 1, 82, 1),
+(177, 2, 82, 1),
+(178, 1, 83, 1),
+(179, 2, 83, 1),
+(180, 1, 84, 1),
+(181, 2, 84, 1);
 
 -- --------------------------------------------------------
 
@@ -128,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `Carro` (
   PRIMARY KEY (`id_carro`),
   KEY `id_color` (`id_color`),
   KEY `id_modelo_carro` (`id_modelo_carro`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=26 ;
 
 --
 -- Volcado de datos para la tabla `Carro`
@@ -157,7 +153,9 @@ INSERT INTO `Carro` (`id_carro`, `fecha_fabricacion`, `id_modelo_carro`, `id_col
 (20, '1973-01-01', 1, 7),
 (21, '1973-01-01', 1, 7),
 (22, '1973-01-01', 1, 7),
-(23, '1973-01-01', 1, 7);
+(23, '1973-01-01', 1, 7),
+(24, '1973-01-01', 1, 7),
+(25, '1973-01-01', 1, 7);
 
 -- --------------------------------------------------------
 
@@ -186,7 +184,22 @@ INSERT INTO `Carro_forma_tren` (`id_carro`, `num_tren`) VALUES
 (7, 3),
 (8, 3),
 (9, 3),
-(10, 3);
+(10, 3),
+(11, 4),
+(12, 4),
+(13, 4),
+(14, 4),
+(15, 4),
+(16, 5),
+(17, 5),
+(18, 5),
+(19, 5),
+(20, 5),
+(21, 6),
+(22, 6),
+(23, 6),
+(24, 6),
+(25, 6);
 
 -- --------------------------------------------------------
 
@@ -251,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `Estacion` (
   `id_ruta` int(11) NOT NULL,
   PRIMARY KEY (`id_estacion`),
   KEY `id_ruta` (`id_ruta`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=85 ;
 
 --
 -- Volcado de datos para la tabla `Estacion`
@@ -270,7 +283,7 @@ INSERT INTO `Estacion` (`id_estacion`, `nombre_estacion`, `id_ruta`) VALUES
 (10, 'Los Leones', 3),
 (11, 'Tobalaba', 3),
 (12, 'El golf', 3),
-(41, 'Vicente Valdez', 3),
+(41, 'Vicente Valdes', 3),
 (42, 'Bellavista de la Florida', 3),
 (43, 'Mirador', 3),
 (44, 'Pedrero', 3),
@@ -285,14 +298,12 @@ INSERT INTO `Estacion` (`id_estacion`, `nombre_estacion`, `id_ruta`) VALUES
 (53, 'Bellas Artes', 3),
 (54, 'Plaza de Armas', 3),
 (55, 'Santa Ana', 3),
-(56, 'Vespucio Norte', 3),
-(57, 'Zapadores', 3),
-(58, 'Dorsal', 3),
-(59, 'Einstein', 3),
-(60, 'Cementerios', 3),
-(61, 'Cerro Blanco', 3),
-(62, 'Patronato', 3),
-(63, 'Puente Cal y Canto', 3);
+(79, 'Republica', 3),
+(80, 'ULA', 3),
+(81, 'AlcÃ¡ntara', 3),
+(82, 'Escuela Militar', 3),
+(83, 'Manquehue', 3),
+(84, 'Hernando deagallanes', 3);
 
 -- --------------------------------------------------------
 
@@ -371,7 +382,7 @@ CREATE TABLE IF NOT EXISTS `Linea` (
   `id_color_linea` int(11) NOT NULL,
   PRIMARY KEY (`num_linea`),
   KEY `id_color_linea` (`id_color_linea`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `Linea`
@@ -379,8 +390,7 @@ CREATE TABLE IF NOT EXISTS `Linea` (
 
 INSERT INTO `Linea` (`num_linea`, `id_color_linea`) VALUES
 (1, 1),
-(5, 2),
-(2, 6);
+(5, 2);
 
 -- --------------------------------------------------------
 
@@ -457,7 +467,10 @@ CREATE TABLE IF NOT EXISTS `Posicion_tren` (
 
 INSERT INTO `Posicion_tren` (`id_tren`, `id_anden`, `id_conductor`, `fecha_hora_posicion`) VALUES
 (2, 1, 1, '2012-07-16 06:30:00'),
-(3, 2, 2, '2012-07-16 06:30:00');
+(3, 2, 2, '2012-07-16 06:30:00'),
+(4, 4, 2, '2012-07-16 06:30:00'),
+(5, 6, 2, '2012-07-16 06:30:00'),
+(6, 8, 2, '2012-07-16 06:30:00');
 
 -- --------------------------------------------------------
 
@@ -477,12 +490,10 @@ CREATE TABLE IF NOT EXISTS `Primer_anden_linea` (
 --
 
 INSERT INTO `Primer_anden_linea` (`num_linea`, `id_anden`) VALUES
-(1, 1),
-(1, 27),
+(1, 172),
+(1, 181),
 (5, 80),
-(5, 111),
-(2, 112),
-(2, 127);
+(5, 111);
 
 -- --------------------------------------------------------
 
@@ -548,7 +559,7 @@ CREATE TABLE IF NOT EXISTS `Tren` (
   `id_estado_tren` int(11) NOT NULL,
   PRIMARY KEY (`id_tren`),
   KEY `id_estado_tren` (`id_estado_tren`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=7 ;
 
 --
 -- Volcado de datos para la tabla `Tren`
@@ -556,7 +567,10 @@ CREATE TABLE IF NOT EXISTS `Tren` (
 
 INSERT INTO `Tren` (`id_tren`, `num_convoy`, `fecha_hora_inicio`, `fecha_hora_termino`, `id_estado_tren`) VALUES
 (2, 101, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 1),
-(3, 102, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 1);
+(3, 102, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 1),
+(4, 103, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 1),
+(5, 104, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 1),
+(6, 105, '2012-07-16 06:30:00', '2012-07-16 09:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -613,13 +627,12 @@ INSERT INTO `Tunel` (`id_anden_origen`, `id_anden_destino`) VALUES
 (104, 106),
 (106, 108),
 (108, 110),
-(112, 114),
-(114, 116),
-(116, 118),
-(118, 120),
-(120, 122),
-(122, 124),
-(124, 126);
+(170, 1),
+(172, 170),
+(12, 174),
+(174, 176),
+(176, 178),
+(178, 180);
 
 --
 -- Restricciones para tablas volcadas
