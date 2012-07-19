@@ -63,21 +63,22 @@
 			$fila = mysql_fetch_assoc($result);
 			$matrix = NULL;
 			while($fila){
-				echo '<div id="'.$fila['id_estacion'].'" class="estacion" >';
-					$estacionDoble = mysql_query("SELECT * FROM Anden NATURAL JOIN Estacion NATURAL JOIN Linea WHERE via = '1' AND id_estacion = '" . $fila['id_estacion'] . "' GROUP BY id_estacion HAVING COUNT(*)>1");
-					$numeroLineasPorEstacion = mysql_num_rows($estacionDoble);
-					if ($numeroLineasPorEstacion) {
-						echo '<div id="img_"'.$fila['id_estacion'].'" class="circle_estacion_combinacion" ></div>';
-					}
-					else {
-						echo '<div id="img_"'.$fila['id_estacion'].'" class="circle_estacion" ></div>';
-					}
-					echo '<div id="txt_"'.$fila['id_estacion'].'" class="txt_estacion" >'.$fila['nombre_estacion'].'</div>';
+				echo '<div id="estacion_'.$fila['id_estacion'].'" class="estacion" >';
+				$ultimaEstacion = $fila['id_estacion'];
+				$estacionDoble = mysql_query("SELECT * FROM Anden NATURAL JOIN Estacion NATURAL JOIN Linea WHERE via = '1' AND id_estacion = '" . $fila['id_estacion'] . "' GROUP BY id_estacion HAVING COUNT(*)>1");
+				$numeroLineasPorEstacion = mysql_num_rows($estacionDoble);
+				if ($numeroLineasPorEstacion) {
+					echo '<div id="img_"'.$fila['id_estacion'].'" class="circle_estacion_combinacion" ></div>';
+				}
+				else {
+					echo '<div id="img_"'.$fila['id_estacion'].'" class="circle_estacion" ></div>';
+				}
+				echo '<div id="txt_"'.$fila['id_estacion'].'" class="txt_estacion" >'.$fila['nombre_estacion'].'</div>';
 				echo '</div>';
 				$result = mysql_query("SELECT Tunel.*,Estacion.*,Anden.id_anden FROM Anden,Tunel,Estacion WHERE Anden.id_estacion = Estacion.id_estacion and Anden.id_anden = Tunel.id_anden_destino and Tunel.id_anden_origen = ".$fila['id_anden']."");
 				$fila = mysql_fetch_assoc($result);
 				if ($fila) {
-					echo '<div class="tunel" style="background-color:'.$this->color_linea.';"> </div> ';
+					echo '<div id="tunel_' .$ultimaEstacion. '" class="tunel" style="background-color:'.$this->color_linea.';"> </div> ';
 				}
 			}
 		}

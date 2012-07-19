@@ -49,7 +49,7 @@
 				while($i < sizeof($arrayLineas)) {
 					echo '<div class="texto" ><b>L'.$arrayLineas[$i]['num_linea'].'</b> <input type="button" value="Eliminar linea" onclick="eliminarLinea('.$arrayLineas[$i]['num_linea'].')"/> </div>';
 					$controladorLineas = new Linea($arrayLineas[$i]['num_linea']);
-					echo '<div id="'. $arrayLineas[$i]['num_linea'] .'" class="linea">';
+					echo '<div id="L'. $arrayLineas[$i]['num_linea'] .'" class="linea">';
 					$estaciones = $controladorLineas->construirLinea();
 					echo '</div>';
 					$i = $i+1;
@@ -79,6 +79,7 @@
 		
 		$(function(){
 				var arregloLineas;
+				var arregloTrenes;
 				$.ajax({
 					url: "principalBus.php",
 					type: "POST",
@@ -91,17 +92,52 @@
 						var cantidadNodos;
 						var maximo = 0;
 						for (i = 0; i < 1; i++) {
-							divLinea = document.getElementById(arregloLineas[i]['num_linea']);
+							divLinea = document.getElementById('L'+arregloLineas[i]['num_linea']);
 							cantidadNodos = divLinea.childNodes.length;
 							if (maximo < cantidadNodos) {
 								maximo = cantidadNodos;
 							}
 							//alert('linea:' + arregloLineas[i]['num_linea'] + ' cantidadNodos:' +cantidadNodos + ' width:'+divLinea.style.width);
 						}
-						document.getElementById('mapaCentral').style.width = (36*cantidadNodos)+'px';
+						document.getElementById('mapaCentral').style.width = (35*(cantidadNodos) + 40)+'px';
 					}
-				})
+				});
 				
+				//Muestro los trenes en las lineas
+				$.ajax({
+					url: "principalBus.php",
+					type: "POST",
+					data: "tm_op=6",
+					async: false,
+					success: function(data){
+						//alert(data);
+						arregloTrenes = $.parseJSON(data);
+						var i;
+						var trenTemp;
+						var numConvoy;
+						var id_estacion;
+						var divDePegado;
+						for (i = 0; i < arregloTrenes.length; i++) {
+							trenTemp = arregloTrenes[i];
+							numConvoy = trenTemp['num_convoy'];
+							id_estacion = trenTemp['id_estacion'];
+							if (trenTemp['nombre_estado_tren'] == 'En anden') {
+								divDePegado = document.getElementById('estacion_' + id_estacion);
+								var imagenTren = document.createElement('div');
+								imagenTren.id = 'tren_'+numConvoy;
+								imagenTren.className = 'tren';
+								imagenTren.innerHTML = ''+numConvoy;
+								//$(imagenTren).hide();
+								$(divDePegado).append(imagenTren);
+							}
+							if (trenTemp['nombre_estado_tren'] == 'En tunel') {
+								divDePegado = document.getElementById('tunel_' + id_estacion);
+								
+							}
+						}
+						
+					}
+				});
 		});
 	</script>	
 </html>

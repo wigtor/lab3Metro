@@ -130,7 +130,7 @@
 				$ruta = 3; //Estática por ahora
 				$queryEstacion = mysql_query("INSERT INTO Estacion(nombre_estacion, id_ruta) VALUES ('" .$nombreEstacion. "', '$ruta')");
 				$id_ultima_estacion = mysql_insert_id($connect);//SE OBTIENE EL ID DE LA ULTIMA ESTACIÓN INSERTADA
-			}
+			}-
 			
 			//Inserto los dos andenes de la nueva estación
 			$queryAnden = mysql_query("INSERT INTO Anden(via, id_estacion, num_linea) VALUES ('1', '$id_ultima_estacion', '$numLinea')");
@@ -159,6 +159,20 @@
 			
 			
 			echo 'Realizado';
+		}
+		
+		if ( $option == '6' ) {
+			$connect = mysql_connect("localhost","metro", "metro123");
+			$db = mysql_select_db("metroSantiago", $connect);
+			$query = mysql_query("SELECT id_estacion,id_anden,id_estado_tren,id_tren,num_convoy,nombre_estado_tren,via,num_linea FROM Tren NATURAL JOIN Posicion_tren NATURAL JOIN Estado_tren NATURAL JOIN Anden NATURAL JOIN Estacion");
+			$i = 0;
+			$matrix = NULL;
+			while($row = mysql_fetch_assoc($query)) {
+				$matrix[$i] = $row;
+				
+				$i = $i + 1;
+			}
+			echo json_encode($matrix);
 		}
 		
 	}
