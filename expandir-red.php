@@ -120,7 +120,7 @@
 			$(function(){
 				listarLineas();
 				traerEstacionesTerminales();
-			});  
+			});
 		</script>
 	</div>
 	</body>

@@ -41,7 +41,7 @@
 	<!-- Contenido -->
 	<div id = "bodyMonitorización" class="wrapp" border="0">
 		<div class="texto" >Lineas del sistema de metro</div>
-		<div class="mapa" >
+		<div class="mapa" id="mapaCentral">
 			<?php
 				require_once("linea.php");
 				$arrayLineas = Linea::getAllLineas();
@@ -76,5 +76,32 @@
 				});
 			}
 		}
+		
+		$(function(){
+				var arregloLineas;
+				$.ajax({
+					url: "principalBus.php",
+					type: "POST",
+					data: "tm_op=3",
+					async: false,
+					success: function(data){
+						arregloLineas = $.parseJSON(data);
+						var i;
+						var divLinea;
+						var cantidadNodos;
+						var maximo = 0;
+						for (i = 0; i < 1; i++) {
+							divLinea = document.getElementById(arregloLineas[i]['num_linea']);
+							cantidadNodos = divLinea.childNodes.length;
+							if (maximo < cantidadNodos) {
+								maximo = cantidadNodos;
+							}
+							//alert('linea:' + arregloLineas[i]['num_linea'] + ' cantidadNodos:' +cantidadNodos + ' width:'+divLinea.style.width);
+						}
+						document.getElementById('mapaCentral').style.width = (36*cantidadNodos)+'px';
+					}
+				})
+				
+		});
 	</script>	
 </html>

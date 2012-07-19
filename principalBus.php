@@ -144,6 +144,8 @@
 			if ($row = mysql_fetch_row($query)) { //Si devolvió algo es porque el anden es de via 1
 				$via1 = true;
 				$queryTunel = mysql_query("INSERT INTO Tunel(id_anden_origen, id_anden_destino) VALUES ('$id_anden1', '$id_anden')");
+				
+				$queryExtremo1 = mysql_query("UPDATE Primer_anden_linea SET id_anden = '$id_anden1' WHERE num_linea = '$numLinea' and id_anden = '$id_anden'");
 			}
 			else { //Si es de la via 2, entonces busco el anden de la via 1 en la misma estación
 				$via1 = false;
@@ -152,14 +154,7 @@
 					$id_andenFinal = $row[0];
 					$queryTunel = mysql_query("INSERT INTO Tunel(id_anden_origen, id_anden_destino) VALUES ('$id_andenFinal', '$id_anden1')");
 				}
-			}
-			
-			//Actualizo la estación terminal en los punteros a los extremos
-			if ($via1) {
-				$queryExtremo1 = mysql_query("UPDATE Primer_anden_linea SET id_anden = '$id_anden1' WHERE num_linea = '$numLinea' and id_anden = '$id_anden'");
-			}
-			else {
-				$queryExtremo1 = mysql_query("UPDATE Primer_anden_linea SET id_anden = '$id_anden2' WHERE num_linea = '$numLinea' and id_anden = '$id_andenFinal'");
+				$queryExtremo1 = mysql_query("UPDATE Primer_anden_linea SET id_anden = '$id_anden2' WHERE num_linea = '$numLinea' and id_anden = '$id_anden'");
 			}
 			
 			
